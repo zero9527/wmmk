@@ -1,29 +1,41 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <router-view></router-view>
+    <load0 :loadshow='$store.state.loadShow'></load0>
   </div>
 </template>
 
-<style lang="less">
+<script>
+import {mapState, mapActions, mapMutations} from 'vuex'
+// vuex 状态管理
+import store from '@/store.js'
+// 自定义 loading 组件
+import load0 from '@/components/load0'
+
+export default {
+  name: 'app',
+  store,
+  components: {
+    load0
+  },
+  data () {
+    return {}
+  },
+  mounted() {},
+  methods: {}
+}
+</script>
+
+<style lang='less'>
+body {
+  margin: 0;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+  // margin-top: 60px;
 }
 </style>

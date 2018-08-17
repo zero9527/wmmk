@@ -5,6 +5,9 @@ Vue.use(Vuex)
 
 const state = {
   loadShow: false,
+  homeHeader: {
+    scrollLeft: ''
+  }
 }
 
 const mutations = {
@@ -12,8 +15,8 @@ const mutations = {
     // 路由变化时的加载 loading
     state.loadShow = val;
   },
-  setHomeTabIndex(state, index) {
-    state.homeState.tabIndex = index
+  setHomeTab(state, val) {  // 设置tab滚动距离
+    state.homeHeader.scrollLeft = val;
   }
 }
 

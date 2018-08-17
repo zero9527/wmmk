@@ -1,6 +1,6 @@
 <template>
-  <div class="mainC">
-    <headerT></headerT>
+  <div class="mainC" @click='mainCLK($event)'>
+    <headerT ref='headfn'></headerT>
     <!-- 下拉刷新 -->
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
       <!-- 列表 包含上拉加载 -->
@@ -101,6 +101,15 @@ export default {
         this.$toast('刷新成功');
         this.isLoading = false;
       }, 500);
+    },
+    mainCLK(e){
+      // console.log('e: ',e);
+      // console.log('headfn: ',this.$refs.headfn);
+      if(e.target.className.indexOf('arrow') == -1){
+        this.$refs.headfn.arrow = 'iconfont icon-down';
+        this.$refs.headfn.menuclass = 'hidemenu';
+        document.body.style.overflow = 'auto';
+      }
     }
   },
   created () {

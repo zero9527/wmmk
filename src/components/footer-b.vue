@@ -91,6 +91,7 @@ export default {
   box-shadow: 0 -2px 10px rgba(0,0,0,.1);
   z-index: 100;
   background: #fbf9fe;
+  transition: transform .3s ease;
 
   ._tab {
     width: 100%;

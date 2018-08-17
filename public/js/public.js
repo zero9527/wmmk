@@ -166,13 +166,44 @@ function numFomat(num, type, sep) {
     return num
 }
 document.addEventListener('scroll', scrollFn,false);
-var scTop;
+var scTop = 0;
 function scrollFn(e){
-    console.log('e: ',e);
-    scTop = e.target.scrollTop;
-    if(e.target.scrollTop > window.innerHeight) {
-        document.querySelector('.gotop').toggleClass('showGotop');
+    e = event || window.event;
+    try {
+        // 向上滚动
+        if((e.target.body.scrollTop || document.documentElement.scrollTop) > scTop) {
+            if(document.querySelector('.headerT').className.indexOf('headHide') == -1){
+                document.querySelector('.headerT').classList.toggle('headHide');
+            }
+            if(document.querySelector('.footerB').className.indexOf('footHide') == -1){
+                document.querySelector('.footerB').classList.toggle('footHide');
+            }
+        }else{
+            if(document.querySelector('.headerT').className.indexOf('headHide') != -1){
+                document.querySelector('.headerT').classList.toggle('headHide');
+            }
+            if(document.querySelector('.footerB').className.indexOf('footHide') != -1){
+                document.querySelector('.footerB').classList.toggle('footHide');
+            }
+        }
+        // console.group();
+        // console.log('e: ',e);
+        scTop = e.target.body.scrollTop || document.documentElement.scrollTop;
+        // console.log('scTop: ',scTop);
+        // console.groupEnd();
+        if(scTop > window.innerHeight) {    // 显示 gotop
+            if(document.querySelector('.gotop').className.indexOf('showGotop') == -1){
+                document.querySelector('.gotop').classList.toggle('showGotop');
+            }
+        }else{  // 隐藏 gotop
+            if(document.querySelector('.gotop').className.indexOf('showGotop') != -1){
+                document.querySelector('.gotop').classList.toggle('showGotop');
+            }
+        }
+    } catch(err) {
+        console.log('err: ',err);
     }
+
 }
 // 点击返回顶部
 // console.log(goTop());

@@ -9,7 +9,7 @@
       </div>
       <div class='div4'>
         <div>
-          <i class='iconfont icon-rili'></i>
+          <i class='iconfont icon-rili' :today='today'></i>
           <i class='iconfont icon-search'></i>
           <i class='iconfont icon-diandian'></i>
         </div>
@@ -52,6 +52,7 @@ export default {
   data () {
     return {
       msg: 'Welcome to headerT',
+      today: '',
       titleList: [
         {name: '最新'},
         {name: '排行榜'},
@@ -82,11 +83,13 @@ export default {
   watch: {},
   created () {
     this.activetitle = this.titleList[0];
+    let today = new Date().getDate();
+    this.today = +today > 10 ? today : '0' + today;
   },
   mounted () {},
   methods: {
     ...mapMutations([
-      'setHomeTabIndex'
+      'setHomeTab'
     ]),
     // 点击三角形显示栏目
     showmenu (e) {
@@ -117,6 +120,7 @@ export default {
       this.activetitle = item;
       let w = window.innerWidth;
       document.querySelector('.title').scrollLeft = osleft-w/2;
+      this.$store.state.homeHeader.scrollLeft = osleft-w/2;
       this.titleline = `width: ${width/2}px;transition:.3s ease;transform:translateX(${osleft+width/4}px)`;
     },
     // 栏目下拉时点击
@@ -141,6 +145,7 @@ export default {
       let width = parseInt(this.getStyle(titlediv, 'width'));
       // console.log('scrollLeft: ',document.querySelector('.title').scrollLeft);
       document.querySelector('.title').scrollLeft = titlediv.offsetLeft-width*2;
+      this.$store.state.homeHeader.scrollLeft = titlediv.offsetLeft-width*2;
       this.titleline = `width:${width/2}px;transform:translateX(${titlediv.offsetLeft+width/4}px)`;
       document.body.style.overflow = 'auto';
     },
@@ -155,6 +160,10 @@ export default {
       }
       return style;
     }
+  },
+  activated() {
+    // 恢复 header 的滚动位置
+    document.querySelector('.title').scrollLeft = this.$store.state.homeHeader.scrollLeft;
   }
 }
 </script>
@@ -167,6 +176,7 @@ export default {
   top: 0;
   background: #fff;
   box-shadow: 0 1px 10px rgba(0,0,0,.1);
+  transition: transform .3s ease;
   z-index: 99;
   .hTop {
     display: flex;
@@ -186,21 +196,24 @@ export default {
   .icon-diandian {
     width: 33.33%;
     display: inline-block;
+    position: relative;
     text-align: center;
+    font-size: 1.2rem !important;
   }
   .titlepar {
     width: 90%;
     height: 10vmin;
-    min-height: 6vh;
+    // min-height: 6vh;
     position: relative;
+    padding-top: 0;
     padding-bottom: 0;
     overflow-x: hidden;
 
     .title {
       height: 10vmin;
       width: 100vw;
+      line-height: 10vmin;
       position: relative;
-      padding-top: 4px;
       overflow-y: hidden;
       overflow-x: scroll;
       white-space: nowrap;
@@ -259,6 +272,17 @@ export default {
 }
 .iconfont {
   font-size: 20px;
+}
+.icon-rili{
+  &::after {
+    // content: '29';
+    content: attr(today);
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    transform: translate(-50%, -50%);
+    font-size: .6rem !important;
+  }
 }
 .hidemenu {
     transform: translateY(-200%) !important;

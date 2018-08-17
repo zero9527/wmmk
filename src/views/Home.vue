@@ -75,10 +75,11 @@ body {
   text-align: center;
   line-height: @w;
   position: fixed;
-  bottom: 10vh;
+  bottom: 16vh;
   right: 3vw;
   border-radius: 50%;
   color: #fff;
+  opacity: 0;
   background: rgba(90, 90, 90, .8);
   box-shadow: 0 2px 10px rgba(0,0,0,.1);
 
@@ -88,5 +89,16 @@ body {
   >i {
     font-size: 1.2rem !important;
   }
+}
+.showGotop {
+  opacity: 1;
+  transition: .3s ease;
+}
+.headHide {
+  transform: translateY(-10vmin);
+}
+.footHide {
+  transform: translateY(14vmin);
+  box-shadow: none;
 }
 </style>

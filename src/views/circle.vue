@@ -31,7 +31,4 @@ li {
 a {
   color: #42b983;
 }
-.van-pull-refresh {
-  padding-top: 0;
-}
 </style>

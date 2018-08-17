@@ -194,7 +194,7 @@ export default {
     min-height: 6vh;
     position: relative;
     padding-bottom: 0;
-    overflow: hidden;
+    overflow-x: hidden;
 
     .title {
       height: 10vmin;

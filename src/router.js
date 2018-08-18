@@ -46,14 +46,17 @@ const routes = [
         meta: {
           title: '我的'
         }
+      },
+      {
+        path: '/newsDetail/:id',
+        name: 'newsDetail',
+        component: () => import('@/views/newsDetail'),
+        props: true,
+        meta: {
+          title: '新闻详情'
+        }
       }
     ]
-  },
-  {
-    path: '/newsDeatil/:id',
-    name: 'newsDeatil',
-    component: () => import('@/views/newsDetail'),
-    props: true
   },
   {
     path: '/about',

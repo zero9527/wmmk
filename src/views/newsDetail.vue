@@ -20,6 +20,20 @@ export default {
   created () {
     // 路由参数最快这个时候获取得到
     this.id = this.$route.params.id;
+  },
+  mounted() {
+    this.hideFoot();
+  },
+  methods: {
+    hideFoot(){
+      // 隐藏底部
+      document.querySelector('.footerB')
+      .setAttribute('class', 'footerB footHide');
+    }
+  },
+  updated() {
+    // 隐藏底部
+    this.hideFoot();
   }
 }
 </script>

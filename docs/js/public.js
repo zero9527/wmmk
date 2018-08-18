@@ -207,8 +207,6 @@ function scrollFn(e) {
         }else if(location.hash.indexOf('circle') > -1){
             window.circleScTop = scTop;
 
-        }else{
-            window.homeScTop = scTop;
         }
     } catch (err) {
         console.log('err: ', err);

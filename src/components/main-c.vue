@@ -129,12 +129,12 @@ export default {
       if(item.className == 'item'){
         let nid = item.getAttribute('nid');
         // console.log('nid: ',nid);
-        this.$router.push(`/newsDeatil/${nid}`);
+        this.$router.push(`/newsDetail/${nid}`);
 
       }else if(e.target.offsetParent.className == 'item'){
         let nid = e.target.offsetParent.getAttribute('nid');
         // console.log('nid: ',nid);
-        this.$router.push(`/newsDeatil/${nid}`);
+        this.$router.push(`/newsDetail/${nid}`);
       }
     }
   },

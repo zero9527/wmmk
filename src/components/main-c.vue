@@ -13,12 +13,14 @@
       <van-list
         v-model="loading"
         :finished="finished"
-        @load="onLoad">
-        <div class='item' v-for='(item, index) in dataList' :key='index'>
+        @load="onLoad" @click.native='newsDetail($event)'>
+        <div class='item' v-for='(item, index) in dataList' 
+        :key='index' :nid='item.id'>
           <p><img :src="item.img" alt=""></p>
           <div>
             <span>{{item.title}}</span>
-            <p>{{item.time}}</p>
+            <p v-if='dataFirst == index+1' class='dataFirst'>置顶</p>
+            <p v-else>{{item.time}}</p>
             <p>{{item.num}}评</p>
           </div>
         </div>
@@ -71,8 +73,9 @@ export default {
           path: 'images/s7.jpg'
         }
       ],
+      dataFirst: 1,
       dataList: [
-        {id: '1',title: '《海岛大亨6》PC版跳票至2019年1月，主机版明夏发售',img:'images/l1.jpg',time: '22:54', num: '0'},
+        {id: '1',title: '《海岛大亨6》PC版跳票至2019年1月，主机版明夏发售',img:'images/l1.jpg',time: '22:54', num: '0',},
         {id: '2',title: '酷派Mega 5A发布：配展讯处理器，印度独占',img:'images/l2.jpg',time: '22:24', num: '2'},
         {id: '3',title: '国产红芯浏览器被指套壳谷歌Chrome，你怎么看？',img:'images/l3.jpg',time: '22:20', num: '10'},
         {id: '4',title: 'WhatsApp创始人仍受雇于FaceBook：未放弃数亿美元股票',img:'images/l4.jpg',time: '21:54', num: '20'},
@@ -116,6 +119,23 @@ export default {
         this.$refs.headfn.menuclass = 'hidemenu';
         document.body.style.overflow = 'auto';
       }
+    },
+    // 点击首页咨询项目
+    newsDetail(e) {
+      // console.log('e: ',e);
+      // 子项目
+      let item = e.target.offsetParent.parentNode;
+      // console.log('item: ',item);
+      if(item.className == 'item'){
+        let nid = item.getAttribute('nid');
+        // console.log('nid: ',nid);
+        this.$router.push(`/newsDeatil/${nid}`);
+
+      }else if(e.target.offsetParent.className == 'item'){
+        let nid = e.target.offsetParent.getAttribute('nid');
+        // console.log('nid: ',nid);
+        this.$router.push(`/newsDeatil/${nid}`);
+      }
     }
   },
   created () {
@@ -140,7 +160,14 @@ li {
 a {
   color: #42b983;
 }
-
+.dataFirst {
+  padding: 2px 4px;
+  color: #fff !important;
+  border-radius: 2px;
+  background: #fa2c2c;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 /* 列表 */
 .item {
   min-height: 100px;

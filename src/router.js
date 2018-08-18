@@ -50,6 +50,12 @@ const routes = [
     ]
   },
   {
+    path: '/newsDeatil/:id',
+    name: 'newsDeatil',
+    component: () => import('@/views/newsDetail'),
+    props: true
+  },
+  {
     path: '/about',
     name: 'about',
     // route level code-splitting

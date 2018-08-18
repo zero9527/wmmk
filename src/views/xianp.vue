@@ -28,6 +28,20 @@
     </van-swipe>
     <!-- 下拉刷新 -->
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+      <!-- 横向辣榜 -->
+      <p class='btitle'>
+        <span><i></i>辣榜</span>
+        <span><i class='redbtn'>></i>更多</span>
+      </p>
+      <ul class='bList'>
+        <li class='bitem' v-for='(item, index) in bList' :key='index'>
+          <img :src='item.img' alt="">
+          <div class='tag'>{{index}}</div>
+          <p>{{item.title}}</p>
+          <span>{{item.text}}</span>
+          <b class='redbtn'>领{{item.sale}}元券</b>
+        </li>
+      </ul>
       <!-- 列表 包含上拉加载 -->
       <van-list
         v-model="loading"
@@ -103,6 +117,7 @@ export default {
         {name: '19块9'},
         {name: '福包'}
       ],
+      bList: [],  // 辣榜
       dataList: [],
       uphide: '',                   // logo栏下滑消失
       titleparstyle: '',            // titlepar样式(是否滚动)
@@ -128,6 +143,18 @@ export default {
       this.dataList.push(item);
       item['aftermoney'] = item.money - item.salemoney;
     })
+
+    let bList = [
+      {id: 1,title: '【北京同仁堂】农家野生蜂蜜拉拉啊了',img:'images/l6.jpg',text: '券后39.8+10红包',sale: '10'},
+      {id: 2,title: '韩国进口，LG竹子盐派按按压魔力',img:'images/l1.jpg',text: '券后38.8+10红包',sale: '30'},
+      {id: 3,title: '灵感针织，轻便，畅跑，361',img:'images/l9.jpg',text: '券后79+10红包',sale: '30'},
+      {id: 4,title: '【北京同仁堂】农家野生蜂蜜拉拉啊了',img:'images/l2.jpg',text: '券后59+10红包',sale: '40'},
+      {id: 5,title: '【北京同仁堂】农家野生蜂蜜拉拉啊了',img:'images/l4.jpg',text: '券后14+10红包',sale: '5'},
+      {id: 6,title: '【北京同仁堂】农家野生蜂蜜拉拉啊了',img:'images/l7.jpg',text: '券后34+10红包',sale: '18'},
+      {id: 7,title: '【北京同仁堂】农家野生蜂蜜拉拉啊了',img:'images/l5.jpg',text: '券后69+10红包',sale: '20'},
+      {id: 8,title: '【北京同仁堂】农家野生蜂蜜拉拉啊了',img:'images/l8.jpg',text: '券后19+10红包',sale: '12'},
+    ];
+    this.bList = bList;
   },
   mounted() {
     // 设置初始 title下划线位置
@@ -334,7 +361,71 @@ a {
     line-height: 200px;
   }
 }
-
+.btitle {
+  margin: 0;
+  padding: 2px 10px;
+  overflow: hidden;
+  color: red;
+  &>span:nth-of-type(1) {
+    float: left;
+  }
+  &>span:nth-of-type(2) {
+    float: right;
+    >i {
+      padding: 0 2px;
+      margin-right: 6px;
+    }
+  }
+}
+.bList {
+  width: 100vw;
+  display: flex;
+  position: relative;
+  padding: 10px;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  >.bitem {
+    flex: 0 0 20vw;
+    width: 24vw;
+    margin: 0;
+    margin-right: 10px;
+    padding-right: 10px;
+    font-size: .9rem;
+    box-sizing: content-box;
+    &:last-of-type {
+      margin-right: 20px;
+    }
+    >.tag {
+      top: 5%;
+      padding-top: 2px;
+      color: #fff;
+      background: red;
+    }
+    >img {
+      width: 100%;
+      border-radius: 2px;
+    }
+    >p {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      margin: 4px 0;
+    }
+    >span {
+      width: 100%;
+      display: inline-block;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: red;
+      margin: 4px 0;
+      overflow: hidden;
+    }
+    >b {
+      font-weight: normal;
+    }
+  }
+}
 /* 列表 */
 .itemx {
   min-height: 100px;
@@ -397,6 +488,44 @@ a {
         }
       }
     }
+  }
+}
+.redbtn {
+  padding: 2px 4px;
+  color: #fff;
+  border-radius: 2px;
+  background: #fa2c2c;
+  box-shadow: 0 2px 4px rgba(0,0,0,.2);
+}
+.tag {
+  width: 18px;
+  height: 16px;
+  position: absolute;
+  background: red;
+  transform: translate3d(0,0,0);
+  &::before {
+    content: '';
+    width: 0;
+    height: 0;
+    position: fixed;
+    left: 0;
+    bottom: -8px;
+    border-style: solid;
+    border-width: 8px;
+    border-color: red transparent transparent red;
+    z-index: -1;
+  }
+  &::after {
+    content: '';
+    width: 0;
+    height: 0;
+    position: fixed;
+    right: 0;
+    bottom: -8px;
+    border-style: solid;
+    border-width: 8px;
+    border-color: red red transparent transparent;
+    z-index: -1;
   }
 }
 </style>

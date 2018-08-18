@@ -5,10 +5,15 @@ import store from './store'
 import {mapState, mapMutations} from 'vuex'
 import Vant from 'vant';
 import 'vant/lib/vant-css/index.css';
+import FastClick from 'fastclick'
 
 Vue.use(Vant);
 Vue.config.productionTip = false
 
+import axios from 'axios'
+// Vue.prototype.$ajax = axios
+
+FastClick.attach(document.body)
 new Vue({
   router,
   store,

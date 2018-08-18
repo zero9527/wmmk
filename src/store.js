@@ -7,6 +7,9 @@ const state = {
   loadShow: false,
   homeHeader: {
     scrollLeft: ''
+  },
+  xianpHeader: {
+    scrollLeft: ''
   }
 }
 
@@ -17,6 +20,9 @@ const mutations = {
   },
   setHomeTab(state, val) {  // 设置tab滚动距离
     state.homeHeader.scrollLeft = val;
+  },
+  setXianTab(state, val) {  // 设置tab滚动距离
+    state.xianpHeader.scrollLeft = val;
   }
 }
 

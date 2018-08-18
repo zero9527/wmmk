@@ -60,5 +60,23 @@ const routes = [
 ]
 
 export default new Router({
-  routes
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      // 滚动条按页面分别处理
+      let top;
+      if(location.hash.indexOf('xianp') > -1){
+        top = window.xianpScTop;
+
+      }else if(location.hash.indexOf('circle') > -1){
+          top = window.circleScTop;
+
+      }else{
+          top = window.homeScTop;
+      }
+      return { x: 0, y: top }
+    }
+  }
 })

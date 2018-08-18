@@ -5,7 +5,7 @@
         <router-view></router-view>
       </keep-alive>
     </transition>
-  	<footerB></footerB>
+  	<footerB ref='footer_ref'></footerB>
     <div class='gotop'>
       <i class='iconfont icon-gotop' @touchend='gotop'></i>
     </div>
@@ -29,6 +29,25 @@ export default {
   methods: {
     gotop() {
       goTop();
+    }
+  },
+  watch: {
+    '$route'(){
+      // console.log('this.$route: ',this.$route);
+      // 根据路由选择相应的高亮
+      if(this.$route.path == '/'){
+        this.$refs.footer_ref.activeTab = this.$refs.footer_ref.tabList[0];
+        
+      }else if(this.$route.path == '/xianp'){
+        this.$refs.footer_ref.activeTab = this.$refs.footer_ref.tabList[1];
+
+      }else if(this.$route.path == '/circle'){
+        this.$refs.footer_ref.activeTab = this.$refs.footer_ref.tabList[2];
+
+      }else if(this.$route.path == '/mine'){
+        this.$refs.footer_ref.activeTab = this.$refs.footer_ref.tabList[3];
+
+      }
     }
   }
 }

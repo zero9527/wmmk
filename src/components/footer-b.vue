@@ -35,7 +35,7 @@ export default {
           path: '/'
         },
         {
-          name: '咸品',
+          name: '辣品',
           icon: 'iconfont icon-xianp',
           path: '/xianp'
         },
@@ -53,6 +53,7 @@ export default {
     }
   },
   created () {
+    // console.log('this.$route: ',this.$route);
     // 根据路由选择相应的高亮
     if(this.$route.path == '/'){
       this.activeTab = this.tabList[0];

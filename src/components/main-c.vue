@@ -1,6 +1,12 @@
 <template>
   <div class="mainC" @click='mainCLK($event)'>
     <headerT ref='headfn'></headerT>
+    <!-- 轮播图 -->
+    <van-swipe :autoplay="3000">
+      <van-swipe-item v-for="(item, index) in swipeList" :key="index">
+        <img :src="item.path" />
+      </van-swipe-item>
+    </van-swipe>
     <!-- 下拉刷新 -->
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
       <!-- 列表 包含上拉加载 -->
@@ -8,7 +14,7 @@
         v-model="loading"
         :finished="finished"
         @load="onLoad">
-        <div class='item' v-for='item in dataList'>
+        <div class='item' v-for='(item, index) in dataList' :key='index'>
           <p><img :src="item.img" alt=""></p>
           <div>
             <span>{{item.title}}</span>
@@ -35,34 +41,34 @@ export default {
       loading: false,
       finished: false,
       isLoading: false,
-      items: [
+      swipeList: [
         {
           url: 'javascript:;',
-          image: 'images/s1.jpg'
+          path: 'images/s1.jpg'
         },
         {
           url: 'javascript:;',
-          image: 'images/s2.jpg'
+          path: 'images/s2.jpg'
         },
         {
           url: 'javascript:;',
-          image: 'images/s3.jpg'
+          path: 'images/s3.jpg'
         },
         {
           url: 'javascript:;',
-          image: 'images/s4.jpg'
+          path: 'images/s4.jpg'
         },
         {
           url: 'javascript:;',
-          image: 'images/s5.jpg'
+          path: 'images/s5.jpg'
         },
         {
           url: 'javascript:;',
-          image: 'images/s6.jpg'
+          path: 'images/s6.jpg'
         },
         {
           url: 'javascript:;',
-          image: 'images/s7.jpg'
+          path: 'images/s7.jpg'
         }
       ],
       dataList: [
@@ -144,9 +150,13 @@ a {
   >p {
       flex: 1 0 30%;
       margin: 0;
+      background: #f6f6f6;
     >img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      background: url('../../public/images/load0.gif') no-repeat;
+      background-position: 50%;
+      background-size: 10px 10px;
     }
   }
   >div {
@@ -177,4 +187,33 @@ a {
     }
   }
 }
+.van-swipe {
+  cursor: pointer;
+  &-item {
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    line-height: 150px;
+  }
+  img {
+    width: 100%;
+    // height: auto;
+    height: 41vw;
+    display: block;
+    padding: 4px 6px;
+    box-sizing: border-box;
+    border: none;
+    background: url('../../public/images/load0.gif') no-repeat;
+    background-position: 50%;
+    background-size: 10px 10px;
+    pointer-events: none;
+  }
+}
+&--vertical {
+  height: 200px;
+  .van-swipe-item {
+    line-height: 200px;
+  }
+}
+
 </style>

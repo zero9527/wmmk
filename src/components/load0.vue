@@ -59,7 +59,9 @@ a {
   left: 50%;
   margin-left: -25px;
   border-radius: 4px;
-  background: rgba(0,0,0,.8);
+  border: 1px solid #f1f1f1;
+  // background: rgba(0,0,0,.8);
+  background: rgba(255,255,255,.9);
   z-index: 99;
 
   >img {

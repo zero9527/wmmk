@@ -2,10 +2,8 @@
   <div class="headerT">
     <div class='hTop' :class='uphide'>
       <div calss='div8'>
-        <div class="flex-demo">
-          <i class='iconfont icon-drinks logo'></i>
-          <span>之家</span>
-        </div>
+        <i class='iconfont icon-drinks logo'></i>
+        <span>之家</span>
       </div>
       <div class='div4'>
         <div>
@@ -201,14 +199,24 @@ export default {
     font-size: 1.2rem !important;
   }
   .titlepar {
-    width: 90%;
+    width: 94%;
     height: 10vmin;
     // min-height: 6vh;
     position: relative;
     padding-top: 0;
     padding-bottom: 0;
+    padding-right: 10%;
     overflow-x: hidden;
-
+    &::after {
+      content: '';
+      height: 100%;
+      width: 2px;
+      position: absolute;
+      top: 0;
+      left: 95%;
+      box-shadow: 0 0 10px rgba(0,0,0,.3);
+      z-index: -1;
+    }
     .title {
       height: 10vmin;
       width: 100vw;
@@ -238,10 +246,13 @@ export default {
   }
   .arrow {
     width: 10vw;
+     height: 10vmin;
+    line-height: 10vmin;
     position: absolute;
     right: 0;
-    top: 13vmin;
+    top: 10vmin;
     text-align: center;
+    background: linear-gradient(to right, rgba(256,256,256,.9) 30%, #fff 50%);
   }
     
   .menupar {
@@ -279,7 +290,7 @@ export default {
     content: attr(today);
     position: absolute;
     left: 50%;
-    top: 70%;
+    top: 72%;
     transform: translate(-50%, -50%);
     font-size: .6rem !important;
   }

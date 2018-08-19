@@ -161,7 +161,9 @@ export default {
   },
   activated() {
     // 恢复 header 的滚动位置
-    document.querySelector('.title').scrollLeft = this.$store.state.homeHeader.scrollLeft;
+    this.$nextTick(() => {
+      document.querySelector('.title').scrollLeft = this.$store.state.homeHeader.scrollLeft;
+    })
   }
 }
 </script>
@@ -209,10 +211,10 @@ export default {
     overflow-x: hidden;
     &::after {
       content: '';
-      height: 100%;
+      height: 80%;
       width: 2px;
       position: absolute;
-      top: 0;
+      top: 10%;
       left: 95%;
       box-shadow: 0 0 10px rgba(0,0,0,.3);
       z-index: -1;

@@ -14,27 +14,30 @@ const routes = [
     path: '/',
     name: 'home',
     component: Home,
+    meta: {
+      title: '水印之家'
+    },
     children: [
-      {
-        path: '/',
-        name: 'index',
-        component: () => import('@/components/main-c'),
-        meta: {
-          title: '水印之家'
-        }
-      },
+      // {
+      //   path: '/',
+      //   name: 'index',
+      //   component: () => import('@/components/main-c'),
+      //   meta: {
+      //     title: '水印之家'
+      //   }
+      // },
       {
         path: '/xianp',
         name: 'xianp',
         component: () => import('@/views/xianp'),
         meta: {
-          title: '咸品'
+          title: '辣品'
         }
       },
       {
-        path: '/circle',
-        name: 'circle',
-        component: () => import('@/views/circle'),
+        path: '/circles',
+        name: 'circles',
+        component: () => import('@/views/circles'),
         meta: {
           title: '圈圈'
         }

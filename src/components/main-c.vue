@@ -13,6 +13,7 @@
       <van-list
         v-model="loading"
         :finished="finished"
+        :offset=20
         @load="onLoad" @click.native='newsDetail($event)'>
         <div class='item' v-for='(item, index) in dataList' 
         :key='index' :nid='item.id'>
@@ -31,8 +32,11 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import headerT from '@/components/header-t'
+import { List } from 'vant';
 
+Vue.use(List);
 export default {
   name: 'mainC',
   components: {
@@ -137,9 +141,6 @@ export default {
         this.$router.push(`/newsDetail/${nid}`);
       }
     }
-  },
-  created () {
-    // console.log('router: ',this.$router);
   }
 }
 </script>
@@ -199,18 +200,19 @@ a {
       text-align: left;
     }
     > p {
+      margin-bottom: 0;
       color: #999;
       font-size: .8rem;
-    }
-    >p:nth-of-type(1)  {
-      position: absolute;
-      bottom: 0;
-      left: 5%;
-    }
-    >p:nth-of-type(2)  {
-      position: absolute;
-      bottom: 0;
-      right: 2%;
+      &:nth-of-type(1)  {
+        position: absolute;
+        bottom: 0;
+        left: 5%;
+      }
+      &:nth-of-type(2)  {
+        position: absolute;
+        bottom: 0;
+        right: 2%;
+      }
     }
   }
 }

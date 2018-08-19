@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import {mapState, mapMutations} from 'vuex'
+import { mapMutations} from 'vuex'
 import Vant from 'vant';
 import 'vant/lib/vant-css/index.css';
 import FastClick from 'fastclick'
@@ -35,7 +35,7 @@ new Vue({
       this.$nextTick(() => {
         setTimeout(() => {
           this.changeLoad(false);
-        },1000)
+        },500)
       })
     }
   },

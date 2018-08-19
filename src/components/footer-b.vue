@@ -42,7 +42,7 @@ export default {
         {
           name: '圈圈',
           icon: 'iconfont icon-quanzi',
-          path: '/circle'
+          path: '/circles'
         },
         {
           name: '我的',
@@ -61,7 +61,7 @@ export default {
     }else if(this.$route.path == '/xianp'){
       this.activeTab = this.tabList[1];
 
-    }else if(this.$route.path == '/circle'){
+    }else if(this.$route.path == '/circles'){
       this.activeTab = this.tabList[2];
 
     }else if(this.$route.path == '/mine'){

@@ -1,13 +1,16 @@
 <template>
   <div class="home">
+    <keep-alive>
+      <mainC v-show='$route.name=="home"'></mainC>
+    </keep-alive>
     <transition name='fade' appear>
-      <keep-alive>
+      <keep-alive exclude='newsDetail'>
         <router-view></router-view>
       </keep-alive>
     </transition>
   	<footerB ref='footer_ref'></footerB>
-    <div class='gotop'>
-      <i class='iconfont icon-gotop' @touchend='gotop'></i>
+    <div class='gotop' @click='gotop'>
+      <i class='iconfont icon-gotop'></i>
     </div>
   </div>
 </template>
@@ -17,23 +20,50 @@
  * 显示调配组件
  */
 import footerB from '@/components/footer-b'
+import mainC from '@/components/main-c'
 
 export default {
   name: 'home',
   components: {
-  	footerB
+    mainC,
+    footerB
   },
   data() {
     return {}
   },
   methods: {
+    // 回顶部
     gotop() {
-      goTop();
+      let scint;
+      let scTop = document.body.scrollTop || document.documentElement.scrollTop;
+      // console.log('scTop: ',scTop);
+      scTop -= 40;
+      scint = setTimeout(() => {
+          document.body.scrollTop
+              ? (document.body.scrollTop = scTop)
+              : (document.documentElement.scrollTop = scTop);
+
+          if (scTop <= 0) {
+              clearTimeout(scint);
+              return;
+          }
+          this.gotop();
+      }, 1)
+    },
+    setFlex(){
+      if(this.$route.name != 'newsDetail'){
+        try{
+          document.querySelectorAll('.footerB')[1]
+          .style.display = 'flex';
+        } catch (err){
+          console.log('err: ',err);
+        }
+      }
     }
   },
   watch: {
     '$route'(){
-      console.log('this.$route: ',this.$route);
+      // console.log('this.$route: ',this.$route);
       // 根据路由选择相应的高亮
       if(this.$route.name == 'index'){
         this.$refs.footer_ref.activeTab = this.$refs.footer_ref.tabList[0];
@@ -48,17 +78,11 @@ export default {
         this.$refs.footer_ref.activeTab = this.$refs.footer_ref.tabList[3];
 
       }
-      if(this.$route.name != 'newsDetail'){
-        document.querySelectorAll('.footerB')[1]
-        .style.display = 'block';
-      }
+      this.setFlex();
     }
   },
   activated() {
-      if(this.$route.name != 'newsDetail'){
-        document.querySelectorAll('.footerB')[1]
-        .style.display = 'block';
-      }
+    this.setFlex();
   }
 }
 </script>
@@ -131,5 +155,8 @@ body {
   transform: translateY(14vmin);
   box-shadow: none;
 }
-
+.item:active,
+.itemx:active {
+  background: #f6f6f6;
+}
 </style>

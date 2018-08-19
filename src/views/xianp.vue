@@ -47,7 +47,7 @@
         v-model="loading"
         :finished="finished"
         @load="onLoad">
-        <div class='itemx' v-for='(item, index) in dataList' :key='index'>
+        <div class='itemx' v-for='(item, index) in xdataList' :key='index'>
           <p><img :src="item.img" alt=""></p>
           <div>
             <span>{{item.title}}</span>
@@ -118,7 +118,7 @@ export default {
         {name: '福包'}
       ],
       bList: [],  // 辣榜
-      dataList: [],
+      xdataList: [],
       uphide: '',                   // logo栏下滑消失
       titleparstyle: '',            // titlepar样式(是否滚动)
       titleline: '',                // 栏目下面的横线
@@ -140,7 +140,7 @@ export default {
       {id: '10',title: '人脸识别机器人毁掉了我玩“找茬”最后的乐趣',img:'images/l10.jpg',money: '356', num: '156', salemoney: '60'},
     ]
     list.forEach((item) => {
-      this.dataList.push(item);
+      this.xdataList.push(item);
       item['aftermoney'] = item.money - item.salemoney;
     })
 
@@ -503,6 +503,7 @@ a {
   position: absolute;
   background: red;
   transform: translate3d(0,0,0);
+  font-size: .8rem;
   &::before {
     content: '';
     width: 0;

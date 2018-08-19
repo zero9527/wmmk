@@ -2,7 +2,7 @@
   <div class='newsDetail'>
     <div class='headerT'></div>
     <h3 class='title'>{{info.title}}</h3>
-    <p class='attr'>{{info.time}} {{info.editor}}</p>
+    <p class='newsattr'>{{info.time}} {{info.editor}}</p>
     <div class='content' v-html='info.content'></div>
     <p class='attr'>
       <span>责任编辑：{{info.editor}}</span>
@@ -42,6 +42,9 @@
           <p>{{hot.content}}</p>
         </li>
       </ul>
+      <div>
+        <h3 style='font-weight:normal;color: #999;'>查看更多评论</h3>
+      </div>
     </div>
     <div class='footerB'>
       <van-icon name="edit" />
@@ -98,18 +101,18 @@ export default {
     ];
   },
   mounted() {
-    this.hideFoot();
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-    // console.log(document.querySelectorAll('.footerB')[1])
-    document.querySelectorAll('.footerB')[1]
-      .style.display = 'none';
+    this.pageinit();
   },
   methods: {
-    hideFoot(){
+    pageinit(){
       // 隐藏底部
       document.querySelector('.footerB')
       .setAttribute('class', 'footerB footHide');
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+      // console.log(document.querySelectorAll('.footerB')[1])
+      document.querySelectorAll('.footerB')[1]
+      .style.display = 'none';
     },
     score(type){
       // 0:无价值，1：还可以，2：有价值
@@ -119,20 +122,6 @@ export default {
       })
       mbtn[+type].setAttribute('class', 'mbtn fred');
     }
-  },
-  updated() {
-    // 隐藏底部
-    this.hideFoot();
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-    document.querySelectorAll('.footerB')[1]
-      .style.display = 'none';
-  },
-  activated() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-    document.querySelectorAll('.footerB')[1]
-      .style.display = 'none';
   }
 }
 </script>
@@ -140,6 +129,10 @@ export default {
 <style scoped lang='less'>
 .title {
   padding: 0 10%;
+}
+.newsattr {
+  color: #999;
+  padding: 0 5%;
 }
 .attr {
   color: #999;
@@ -299,6 +292,8 @@ export default {
   }
   >input {
     width: 40%;
+    height: 100%;
+    padding: 4px;
     border: none;
     outline: none;
   }
@@ -310,5 +305,11 @@ export default {
 }
 .fred {
   color: red;
+}
+</style>
+<style>
+a:active {
+  color: rgb(136, 0, 0) !important;
+  border-bottom: 1px solid rgb(187, 11, 11) !important;
 }
 </style>

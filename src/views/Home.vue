@@ -48,7 +48,17 @@ export default {
         this.$refs.footer_ref.activeTab = this.$refs.footer_ref.tabList[3];
 
       }
+      if(this.$route.name != 'newsDetail'){
+        document.querySelectorAll('.footerB')[1]
+        .style.display = 'block';
+      }
     }
+  },
+  activated() {
+      if(this.$route.name != 'newsDetail'){
+        document.querySelectorAll('.footerB')[1]
+        .style.display = 'block';
+      }
   }
 }
 </script>
@@ -66,6 +76,7 @@ body {
 .home {
   min-width: 100vw;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 .mainC {
   width: 100%;

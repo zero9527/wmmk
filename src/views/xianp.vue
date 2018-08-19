@@ -36,7 +36,7 @@
       <ul class='bList'>
         <li class='bitem' v-for='(item, index) in bList' :key='index'>
           <img :src='item.img' alt="">
-          <div class='tag'>{{index}}</div>
+          <div class='tag'>{{index+1}}</div>
           <p>{{item.title}}</p>
           <span>{{item.text}}</span>
           <b class='redbtn'>领{{item.sale}}元券</b>

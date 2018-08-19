@@ -27,7 +27,10 @@
       </van-swipe-item>
     </van-swipe>
     <!-- 下拉刷新 -->
-    <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+    <van-pull-refresh
+      v-model="isLoading"
+      :disabled='refreshFlag'
+      @refresh="onRefresh">
       <!-- 横向辣榜 -->
       <p class='btitle'>
         <span><i></i>辣榜</span>
@@ -76,6 +79,8 @@ export default {
   data () {
     return {
       msg: '辣品',
+      scrollTop: '',
+      refreshFlag: false,
       loading: false,
       finished: false,
       isLoading: false,
@@ -123,6 +128,7 @@ export default {
       titleparstyle: '',            // titlepar样式(是否滚动)
       titleline: '',                // 栏目下面的横线
       activetitle: '',  // 下拉栏目选中
+      sint: ''
     }
   },
   created() {
@@ -155,6 +161,16 @@ export default {
       {id: 8,title: '【北京同仁堂】农家野生蜂蜜拉拉啊了',img:'images/l8.jpg',text: '券后19+10红包',sale: '12'},
     ];
     this.bList = bList;
+    this.sint = setInterval(() => {
+      // 解决任意向上滑动都会下拉刷新问题
+      this.scrollTop = window.scTop;
+    },1)
+  },
+  watch: {
+    scrollTop: function(val) {
+      // console.log('val: ',val);
+      this.refreshFlag = val <= 10 ? false : true;
+    }
   },
   mounted() {
     // 设置初始 title下划线位置
@@ -191,11 +207,11 @@ export default {
       // 上拉加载
       setTimeout(() => {
         for (let i = 0; i < 10; i++) {
-          this.dataList.push(this.dataList[i]);
+          this.xdataList.push(this.xdataList[i]);
         }
         this.loading = false;
 
-        if (this.dataList.length >= 40) {
+        if (this.xdataList.length >= 40) {
           this.finished = true; // 结束
           this.$toast('没有更多数据了，休息一下吧');
         }
@@ -212,6 +228,9 @@ export default {
   activated() {
     // 恢复 header 的滚动位置
     document.querySelector('.title1').scrollLeft = this.$store.state.xianpHeader.scrollLeft;
+  },
+  beforeDestroy() {
+    clearInterval(this.sint);
   }
 } 
 

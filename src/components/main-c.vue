@@ -8,7 +8,10 @@
       </van-swipe-item>
     </van-swipe>
     <!-- 下拉刷新 -->
-    <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+    <van-pull-refresh 
+      v-model="isLoading" 
+      @refresh="onRefresh"
+      :disabled='refreshFlag'>
       <!-- 列表 包含上拉加载 -->
       <van-list
         v-model="loading"
@@ -44,6 +47,8 @@ export default {
   },
   data () {
     return {
+      scrollTop: '',
+      refreshFlag: false,
       loading: false,
       finished: false,
       isLoading: false,
@@ -90,9 +95,21 @@ export default {
         {id: '9',title: '医学泰斗被外卖员撞伤致死，饿了么致歉',img:'images/l9.jpg',time: '18:54', num: '189'},
         {id: '10',title: '人脸识别机器人毁掉了我玩“找茬”最后的乐趣',img:'images/l10.jpg',time: '16:53', num: '156'},
       ],
+      sint: ''
     }
   },
-  computed: {},
+  created() {
+    this.sint = setInterval(() => {
+      // 解决任意向上滑动都会下拉刷新问题
+      this.scrollTop = window.scTop;
+    },1)
+  },
+  watch: {
+    scrollTop: function(val) {
+      // console.log('val: ',val);
+      this.refreshFlag = val <= 10 ? false : true;
+    }
+  },
   methods: {
     onLoad() {
       // 上拉加载
@@ -141,6 +158,9 @@ export default {
         this.$router.push(`/newsDetail/${nid}`);
       }
     }
+  },
+  beforeDestroy() {
+    clearInterval(this.sint);
   }
 }
 </script>

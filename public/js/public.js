@@ -171,22 +171,7 @@ var url;
 function scrollFn(e) {
     e = event || window.event;
     try {
-        // 向上滚动
-        if ((e.target.body.scrollTop || document.documentElement.scrollTop) > scTop) {
-            if (document.querySelector('.headerT').className.indexOf('headHide') == -1) {
-                document.querySelector('.headerT').classList.toggle('headHide');
-            }
-            if (document.querySelector('.footerB').className.indexOf('footHide') == -1) {
-                document.querySelector('.footerB').classList.toggle('footHide');
-            }
-        } else {
-            if (document.querySelector('.headerT').className.indexOf('headHide') != -1) {
-                document.querySelector('.headerT').classList.toggle('headHide');
-            }
-            if (document.querySelector('.footerB').className.indexOf('footHide') != -1) {
-                document.querySelector('.footerB').classList.toggle('footHide');
-            }
-        }
+        
         // console.group();
         // console.log('e: ',e);
         scTop = e.target.body.scrollTop || document.documentElement.scrollTop;
@@ -207,6 +192,28 @@ function scrollFn(e) {
         }else if(location.hash.indexOf('circle') > -1){
             window.circleScTop = scTop;
 
+        }
+        // 向上滚动
+        if ((e.target.body.scrollTop || document.documentElement.scrollTop) > scTop) {
+            if (document.querySelector('.headerT').className.indexOf('headHide') == -1) {
+                document.querySelector('.headerT').classList.toggle('headHide');
+            }
+            if (document.querySelector('.headerX').className.indexOf('headHide') == -1) {
+                document.querySelector('.headerX').classList.toggle('headHide');
+            }
+            if (document.querySelector('.footerB').className.indexOf('footHide') == -1) {
+                document.querySelector('.footerB').classList.toggle('footHide');
+            }
+        } else {
+            if (document.querySelector('.headerT').className.indexOf('headHide') != -1) {
+                document.querySelector('.headerT').classList.toggle('headHide');
+            }
+            if (document.querySelector('.headerX').className.indexOf('headHide') != -1) {
+                document.querySelector('.headerX').classList.toggle('headHide');
+            }
+            if (document.querySelector('.footerB').className.indexOf('footHide') != -1) {
+                document.querySelector('.footerB').classList.toggle('footHide');
+            }
         }
     } catch (err) {
         console.log('err: ', err);

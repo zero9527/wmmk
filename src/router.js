@@ -12,20 +12,20 @@ const routes = [
   },
   {
     path: '/',
-    name: 'home',
+    // name: 'home',
     component: Home,
     meta: {
       title: '水印之家'
     },
     children: [
-      // {
-      //   path: '/',
-      //   name: 'index',
-      //   component: () => import('@/components/main-c'),
-      //   meta: {
-      //     title: '水印之家'
-      //   }
-      // },
+      {
+        path: '/',
+        name: 'index',
+        component: () => import('@/components/main-c'),
+        meta: {
+          title: '水印之家'
+        }
+      },
       {
         path: '/xianp',
         name: 'xianp',

@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class='titlepar' :style='titleparstyle'>
-      <div class='title'>
+      <div class='title htitle'>
         <div class='tcenter' 
         v-for='(item, index) in titleList'
         @click='clkTitle(item, $event, index)' 
@@ -157,13 +157,16 @@ export default {
         style = window.getComputedStyle(el, false);
       }
       return style;
+    },
+    goleft(){
+      // 恢复 header 的滚动位置
+      this.$nextTick(() => {
+        document.querySelector('.title.htitle').scrollLeft = this.$store.state.homeHeader.scrollLeft;
+      })
     }
   },
   activated() {
-    // 恢复 header 的滚动位置
-    this.$nextTick(() => {
-      document.querySelector('.title').scrollLeft = this.$store.state.homeHeader.scrollLeft;
-    })
+    this.goleft();
   }
 }
 </script>

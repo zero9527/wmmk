@@ -256,7 +256,7 @@ export default {
         line-height: 1;
         border-radius: 2px;
         color: #888;
-        background: #e6e6e6;
+        background: #eceff1;
       }
       >p {
         margin-top: 0;

@@ -1,9 +1,6 @@
 <template>
   <div class="home">
-    <keep-alive>
-      <mainC v-show='$route.name=="home"'></mainC>
-    </keep-alive>
-    <transition name='fade' appear>
+    <transition :name='transitionName' appear>
       <keep-alive exclude='newsDetail'>
         <router-view></router-view>
       </keep-alive>
@@ -29,7 +26,9 @@ export default {
     footerB
   },
   data() {
-    return {}
+    return {
+      transitionName: 'fade'
+    }
   },
   methods: {
     // 回顶部
@@ -62,8 +61,9 @@ export default {
     }
   },
   watch: {
-    '$route'(){
+    '$route'(to, from){
       // console.log('this.$route: ',this.$route);
+      // console.log('from: ',from);
       // 根据路由选择相应的高亮
       if(this.$route.name == 'index'){
         this.$refs.footer_ref.activeTab = this.$refs.footer_ref.tabList[0];

@@ -236,7 +236,7 @@ export default {
   >ul {
     display: flex;
     margin-bottom: 10px;
-    padding: 6px 0;
+    padding: 6px 5%;
     border-bottom: 1px solid #f6f6f6;
     >li {
       font-size: .9rem;
@@ -245,6 +245,7 @@ export default {
       }
       &:nth-of-type(2) {
         flex: 1 0 90%;
+        padding-left: 10px;
       }
       >img {
         width: 10vw;
@@ -269,11 +270,12 @@ export default {
         >p {
           margin-top: 0;
           color: #999;
+          font-size: .8rem;
         }
         >b {
           position: absolute;
           top: 0;
-          right: 20%;
+          right: 5%;
           color: #999;
           font-weight: normal;
         }

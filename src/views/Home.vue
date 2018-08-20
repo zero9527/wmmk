@@ -78,6 +78,11 @@ export default {
         this.$refs.footer_ref.activeTab = this.$refs.footer_ref.tabList[3];
 
       }
+      if(from.name == 'newsDetail'){
+        this.transitionName = 'slide-fade'
+      }else{
+        this.transitionName = 'fade';
+      }
       this.setFlex();
     }
   },
@@ -112,6 +117,17 @@ body {
   position: absolute;
 }
 .fade-enter, .fade-leave-to, .fade-leave-active {
+  opacity: 0;
+}
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateX(80vw);
   opacity: 0;
 }
 /* 下拉刷新 */

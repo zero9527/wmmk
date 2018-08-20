@@ -8,7 +8,7 @@
         <router-view></router-view>
       </keep-alive>
     </transition>
-  	<footerB ref='footer_ref'></footerB>
+    <footerB ref='footer_ref'></footerB>
     <div class='gotop' @click='gotop'>
       <i class='iconfont icon-gotop'></i>
     </div>
@@ -53,7 +53,7 @@ export default {
     setFlex(){
       if(this.$route.name != 'newsDetail'){
         try{
-          document.querySelectorAll('.footerB')[1]
+          document.querySelector('.footer_B')
           .style.display = 'flex';
         } catch (err){
           console.log('err: ',err);

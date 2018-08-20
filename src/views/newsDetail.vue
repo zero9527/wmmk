@@ -110,8 +110,8 @@ export default {
       .setAttribute('class', 'footerB footHide');
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
-      // console.log(document.querySelectorAll('.footerB')[1])
-      document.querySelectorAll('.footerB')[1]
+      // console.log(document.querySelector('.footer_B'))
+      document.querySelector('.footer_B')
       .style.display = 'none';
     },
     score(type){

@@ -1,5 +1,5 @@
 <template>
-  <div class="footerB">
+  <div class="footerB footer_B">
     <ul class='_tab'>
       <li v-for='tab in tabList' 
       :key='tab.id'

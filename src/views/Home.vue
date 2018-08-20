@@ -141,7 +141,7 @@ body {
     background: rgba(70, 70, 70, .8);
   }
   >i {
-    font-size: 1.2rem !important;
+    font-size: 6vw !important;
   }
 }
 .showGotop {

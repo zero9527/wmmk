@@ -1,12 +1,6 @@
 <template>
   <div class="mainC" @click='mainCLK($event)'>
     <headerT ref='headfn'></headerT>
-    <!-- 轮播图 -->
-    <van-swipe :autoplay="3000">
-      <van-swipe-item v-for="(item, index) in swipeList" :key="index">
-        <img :src="item.path" />
-      </van-swipe-item>
-    </van-swipe>
     <!-- 下拉刷新 -->
     <van-pull-refresh 
       v-model="isLoading" 
@@ -16,10 +10,17 @@
       <van-list
         v-model="loading"
         :finished="finished"
-        :offset=20
-        @load="onLoad" @click.native='newsDetail($event)'>
+        :offset=10
+        @load="onLoadv">
+        <!-- 轮播图 -->
+        <van-swipe :autoplay="3000">
+          <van-swipe-item v-for="(item, index) in swipeList" :key="index">
+            <img :src="item.path" />
+          </van-swipe-item>
+        </van-swipe>
         <div class='item' v-for='(item, index) in dataList' 
-        :key='index' :nid='item.id'>
+        :key='index' :nid='item.id'
+         @click='newsDetail(item.id)'>
           <p><img :src="item.img" alt=""></p>
           <div>
             <span>{{item.title}}</span>
@@ -28,6 +29,7 @@
             <p>{{item.num}}评</p>
           </div>
         </div>
+        <div v-if='finished'>没有更多数据了</div>
       </van-list>
     </van-pull-refresh>
     <slot></slot>
@@ -111,7 +113,8 @@ export default {
     }
   },
   methods: {
-    onLoad() {
+    onLoadv() {
+      console.log('scrollTop: ',document.documentElement.scrollTop);
       // 上拉加载
       setTimeout(() => {
         for (let i = 0; i < 10; i++) {
@@ -121,7 +124,6 @@ export default {
 
         if (this.dataList.length >= 40) {
           this.finished = true; // 结束
-          this.$toast('没有更多数据了，休息一下吧');
         }
       }, 500);
     },
@@ -142,21 +144,22 @@ export default {
       }
     },
     // 点击首页咨询项目
-    newsDetail(e) {
-      // console.log('e: ',e);
-      // 子项目
-      let item = e.target.offsetParent.parentNode;
-      // console.log('item: ',item);
-      if(item.className == 'item'){
-        let nid = item.getAttribute('nid');
-        // console.log('nid: ',nid);
-        this.$router.push(`/newsDetail/${nid}`);
+    newsDetail(nid) {
+      this.$router.push(`/newsDetail/${nid}`);
+      // // console.log('e: ',e);
+      // // 子项目
+      // let item = e.target.offsetParent.parentNode;
+      // // console.log('item: ',item);
+      // if(item.className == 'item'){
+      //   let nid = item.getAttribute('nid');
+      //   // console.log('nid: ',nid);
+      //   this.$router.push(`/newsDetail/${nid}`);
 
-      }else if(e.target.offsetParent.className == 'item'){
-        let nid = e.target.offsetParent.getAttribute('nid');
-        // console.log('nid: ',nid);
-        this.$router.push(`/newsDetail/${nid}`);
-      }
+      // }else if(e.target.offsetParent.className == 'item'){
+      //   let nid = e.target.offsetParent.getAttribute('nid');
+      //   // console.log('nid: ',nid);
+      //   this.$router.push(`/newsDetail/${nid}`);
+      // }
     }
   },
   beforeDestroy() {

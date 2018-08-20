@@ -288,7 +288,7 @@ export default {
   z-index: 101;
   i {
     padding: 0 10px;
-    font-size: 1.4rem;
+    font-size: 6vw;
   }
   >input {
     width: 40%;

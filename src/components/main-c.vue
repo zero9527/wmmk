@@ -1,5 +1,5 @@
 <template>
-  <div class="mainC" @click='mainCLK($event)'>
+  <div class="mainC">
     <headerT ref='headfn'></headerT>
     <!-- 下拉刷新 -->
     <van-pull-refresh 

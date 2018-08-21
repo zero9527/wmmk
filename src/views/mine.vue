@@ -93,7 +93,7 @@ export default {
     }
   },
   created () {
-    console.log('$route: ',this.$route);
+    // console.log('$route: ',this.$route);
     this.user = {
       name: '氪星超人',
       level: '18',

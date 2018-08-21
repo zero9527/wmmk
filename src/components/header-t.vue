@@ -35,6 +35,7 @@
         @click='selectTitle(item, $event)' :key='item.id'>{{item.name}}</li>
       </ul>
     </div>
+    <div class='bgbg' @click='mainCLK()' v-if='bgbgShow'></div>
     <slot></slot>
   </div>
 </template>
@@ -76,6 +77,7 @@ export default {
       menutitle: '',                // 栏目标题
       menuclass: 'hidemenu',        // 栏目类名
       activetitle: '',  // 下拉栏目选中
+      bgbgShow: false
     }
   },
   watch: {},
@@ -99,6 +101,7 @@ export default {
         this.menuclass = 'showmenu';
         document.body.style.overflow = 'hidden';
 
+        this.bgbgShow = true; // 背景蒙层
       }else{
         this.arrowstyle = 'transition:.3s ease;transform:rotate(0deg)';
         this.titleparstyle = 'overflow-x:scroll;';
@@ -106,6 +109,7 @@ export default {
         this.arrow = 'iconfont icon-down';
         this.menuclass = 'hidemenu';
         document.body.style.overflow = 'auto';
+        this.bgbgShow = false; // 背景蒙层
       }
     },
     // 未展开时点击
@@ -146,6 +150,7 @@ export default {
       this.$store.state.homeHeader.scrollLeft = titlediv.offsetLeft-width*2;
       this.titleline = `width:${width/2}px;transform:translateX(${titlediv.offsetLeft+width/4}px)`;
       document.body.style.overflow = 'auto';
+      this.bgbgShow = false; // 背景蒙层
     },
     // 获取样式
     getStyle (el, attr) {
@@ -157,6 +162,12 @@ export default {
         style = window.getComputedStyle(el, false);
       }
       return style;
+    },
+    mainCLK(e){
+      this.bgbgShow = false;
+      this.arrow = 'iconfont icon-down';
+      this.menuclass = 'hidemenu';
+      document.body.style.overflow = 'auto';
     },
     goleft(){
       // 恢复 header 的滚动位置
@@ -284,6 +295,14 @@ export default {
       padding: 6px 0;
       text-align: center;
     }
+  }
+  .bgbg {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 12vmin;
+    background: rgba(0,0,0,.3);
+    z-index: -2;
   }
 }
 .iconfont {

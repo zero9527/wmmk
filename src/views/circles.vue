@@ -140,7 +140,7 @@ export default {
     titlelineInit() {
       this.$nextTick(() => {
         let titleitem = document.querySelector('.titlec').querySelectorAll('.tcenter')[0];
-        console.log('titleitem: ',titleitem.offsetLeft);
+        // console.log('titleitem: ',titleitem.offsetLeft);
         document.querySelector('.titleline2')
         .setAttribute('style', `transform:translateX(${titleitem.offsetLeft+4}px); 
         width: ${titleitem.offsetWidth-8}px;`);

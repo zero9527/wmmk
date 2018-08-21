@@ -20,17 +20,17 @@
         </div>
       </div>
     </div>
+    <!-- 轮播图 -->
+    <van-swipe :autoplay="3000">
+      <van-swipe-item v-for="(item, index) in swipeList" :key="index">
+        <img :src="item.path" />
+      </van-swipe-item>
+    </van-swipe>
     <!-- 下拉刷新 -->
     <van-pull-refresh
       v-model="isLoading"
       :disabled='refreshFlag'
       @refresh="onRefresh">
-      <!-- 轮播图 -->
-      <van-swipe :autoplay="3000">
-        <van-swipe-item v-for="(item, index) in swipeList" :key="index">
-          <img :src="item.path" />
-        </van-swipe-item>
-      </van-swipe>
       <!-- 横向辣榜 -->
       <p class='btitle'>
         <span><i></i>辣榜</span>

@@ -1,6 +1,12 @@
 <template>
   <div class="mainC">
     <headerT ref='headfn'></headerT>
+    <!-- 轮播图 -->
+    <van-swipe :autoplay="3000">
+      <van-swipe-item v-for="(item, index) in swipeList" :key="index">
+        <img :src="item.path" />
+      </van-swipe-item>
+    </van-swipe>
     <!-- 下拉刷新 -->
     <van-pull-refresh 
       v-model="isLoading" 
@@ -10,14 +16,7 @@
       <van-list
         v-model="loading"
         :finished="finished"
-        :offset=10
         @load="onLoadv">
-        <!-- 轮播图 -->
-        <van-swipe :autoplay="3000">
-          <van-swipe-item v-for="(item, index) in swipeList" :key="index">
-            <img :src="item.path" />
-          </van-swipe-item>
-        </van-swipe>
         <div class='item' v-for='(item, index) in dataList' 
         :key='index' :nid='item.id'
          @click='newsDetail(item.id)'>
@@ -114,7 +113,6 @@ export default {
   },
   methods: {
     onLoadv() {
-      console.log('scrollTop: ',document.documentElement.scrollTop);
       // 上拉加载
       setTimeout(() => {
         for (let i = 0; i < 10; i++) {
@@ -146,20 +144,6 @@ export default {
     // 点击首页咨询项目
     newsDetail(nid) {
       this.$router.push(`/newsDetail/${nid}`);
-      // // console.log('e: ',e);
-      // // 子项目
-      // let item = e.target.offsetParent.parentNode;
-      // // console.log('item: ',item);
-      // if(item.className == 'item'){
-      //   let nid = item.getAttribute('nid');
-      //   // console.log('nid: ',nid);
-      //   this.$router.push(`/newsDetail/${nid}`);
-
-      // }else if(e.target.offsetParent.className == 'item'){
-      //   let nid = e.target.offsetParent.getAttribute('nid');
-      //   // console.log('nid: ',nid);
-      //   this.$router.push(`/newsDetail/${nid}`);
-      // }
     }
   },
   beforeDestroy() {
@@ -169,7 +153,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang='less'>
+<style scoped lang='less'>
 h1, h2 {
   font-weight: normal;
 }
@@ -192,49 +176,52 @@ a {
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
 /* 列表 */
-.item {
-  min-height: 100px;
-  display: flex;
-  position: relative;
-  padding: 10px 2%;
-  >p {
-      flex: 1 0 30%;
-      margin: 0;
-      background: #f6f6f6;
-    >img {
-      width: 100%;
-      height: 100%;
-      background: url('../../public/images/load0.gif') no-repeat;
-      background-position: 50%;
-      background-size: 10px 10px;
-    }
-  }
-  >div {
-    flex: 3 0 70%;
+.mainC{
+  /deep/ .item {
+    min-height: 100px;
+    display: flex;
     position: relative;
-    padding: 0 2%;
-    >span {
-      height: 50%;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      overflow: hidden;
-      text-align: left;
-    }
-    > p {
-      margin-bottom: 0;
-      color: #999;
-      font-size: .8rem;
-      &:nth-of-type(1)  {
-        position: absolute;
-        bottom: 0;
-        left: 5%;
+    padding: 10px 2%;
+    >p {
+        flex: 1 0 30%;
+        margin: 0;
+        background: #f6f6f6;
+      >img {
+        width: 100%;
+        height: 100%;
+        background: url('../../public/images/load0.gif') no-repeat;
+        background-position: 50%;
+        background-size: 10px 10px;
       }
-      &:nth-of-type(2)  {
-        position: absolute;
-        bottom: 0;
-        right: 2%;
+    }
+    >div {
+      flex: 3 0 70%;
+      position: relative;
+      padding: 0 2%;
+      >span {
+        height: 50%;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        text-align: left;
+      }
+      > p {
+        margin-bottom: 0;
+        color: #999;
+        font-size: .8rem;
+        &:nth-of-type(1)  {
+          position: absolute;
+          bottom: 0;
+          left: 5%;
+        }
+        &:nth-of-type(2)  {
+          position: absolute;
+          bottom: 0;
+          right: 2%;
+        }
       }
     }
   }
@@ -251,6 +238,7 @@ a {
     width: 100%;
     // height: auto;
     height: 41vw;
+    min-width: 90vw;
     display: block;
     padding: 4px 6px;
     box-sizing: border-box;

@@ -370,9 +370,11 @@ export default {
     }
   }
 }
-.headHide {
-  -webkit-transform: translateY(-10vmin);
-  transform: translateY(-38vmin);
+.circles {
+  .headHide {
+    -webkit-transform: translateY(-10vmin);
+    transform: translateY(-38vmin);
+  }
 }
 h1, h2 {
   font-weight: normal;

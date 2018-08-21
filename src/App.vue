@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <!-- <transition :name='transitionName' appear> -->
+    <transition :name='transitionName' appear>
       <keep-alive exclude="newsDetail">
         <router-view></router-view>
       </keep-alive>
-    <!-- </transition> -->
+    </transition>
     <footerB ref='footer_ref'></footerB>
     <div class='gotop' @click='gotop'>
       <i class='iconfont icon-gotop'></i>
@@ -101,6 +101,8 @@ body {
   margin: 0;
 }
 #app {
+  min-width: 100vw;
+  min-height: 100vh;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -117,16 +119,7 @@ body {
   background: #fff;
   overflow-x: hidden;
 }
-.home {
-  min-width: 100vw;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-.mainC {
-  width: 100%;
-  padding-top: 22vmin;
-  padding-bottom: 16vmin;
-}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
   position: absolute;

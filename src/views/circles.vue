@@ -122,6 +122,7 @@ export default {
       // 到底部了
       if(window.innerHeight + val >= document.body.scrollHeight - 1){
         if (this.cdataList.length >= 40) return;
+        this.loading = true;
         this.onLoadv();
       }
     }

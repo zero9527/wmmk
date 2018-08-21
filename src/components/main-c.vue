@@ -16,7 +16,6 @@
       <van-list
       v-model="loading"
       :finished="finished"
-      :offset=10>
         <div class='item' v-for='(item, index) in dataList' 
         :key='index' @click='newsDetail(item.id)'>
           <p><img :src="item.img" alt=""></p>
@@ -110,6 +109,7 @@ export default {
       // 到底部了
       if(window.innerHeight + val >= document.body.scrollHeight - 1){
         if (this.dataList.length >= 40) return;
+        this.loading = true;
         this.onLoadv();
       }
     }
@@ -176,6 +176,8 @@ a {
 /* 列表 */
 .mainC{
   width: 100%;
+  padding-top: 22vmin;
+  padding-bottom: 6vh;
   /deep/ .item {
     min-height: 100px;
     display: flex;

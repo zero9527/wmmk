@@ -37,8 +37,7 @@
       <!-- 列表 包含上拉加载 -->
       <van-list
         v-model="loading"
-        :finished="finished"
-        @load="onLoad">
+        :finished="finished">
         <ul class='itemc' v-for='(item, index) in cdataList' :key='index'>
           <li>
             <img :src="item.head" alt="">
@@ -55,6 +54,7 @@
             <p>{{item.num}}回帖</p>
           </li>
         </ul>
+        <div v-if='finished' class='nomore'>没有更多数据了</div>
       </van-list>
     </van-pull-refresh>
   </div>
@@ -104,17 +104,26 @@ export default {
       {id: '1',name:'哈哈',content: '《海岛大亨6》PC版跳票至2019年1月',headType:'畅谈',textType:'杂谈',head:'images/l1.jpg',addtime: '12:59',updatetime:'13:12', num: '290', talkman: '嘿嘿'},
       {id: '2',name:'祖国的花朵',content: '酷派Mega 5A发布',headType:'IOS圈',textType:'windows',head:'images/l2.jpg',addtime: '09:12',updatetime:'10:12', num: '2', talkman: '我是谁'},
       {id: '3',name:'铁壁阿童木',content: '国产红芯浏览器被指套壳谷歌Chrome，你怎么看？',headType:'畅谈',textType:'安卓',head:'images/l3.jpg',addtime: '18:45',updatetime:'19:12', num: '10', talkman: '明天是几号'},
+      {id: '4',name:'铁壁阿童木',content: '国产红芯浏览器被指套壳谷歌Chrome，你怎么看？',headType:'畅谈',textType:'安卓',head:'images/l3.jpg',addtime: '18:45',updatetime:'19:12', num: '10', talkman: '明天是几号'},
+      {id: '5',name:'铁壁阿童木',content: '国产红芯浏览器被指套壳谷歌Chrome，你怎么看？',headType:'畅谈',textType:'安卓',head:'images/l3.jpg',addtime: '18:45',updatetime:'19:12', num: '10', talkman: '明天是几号'},
+      {id: '6',name:'铁壁阿童木',content: '国产红芯浏览器被指套壳谷歌Chrome，你怎么看？',headType:'畅谈',textType:'安卓',head:'images/l3.jpg',addtime: '18:45',updatetime:'19:12', num: '10', talkman: '明天是几号'},
+      {id: '7',name:'铁壁阿童木',content: '国产红芯浏览器被指套壳谷歌Chrome，你怎么看？',headType:'畅谈',textType:'安卓',head:'images/l3.jpg',addtime: '18:45',updatetime:'19:12', num: '10', talkman: '明天是几号'},
     ];
 
     this.sint = setInterval(() => {
       // 解决任意向上滑动都会下拉刷新问题
-      this.scrollTop = window.scTop;
+      this.scrollTop = window.circleScTop;
     },1)
   },
   watch: {
     scrollTop: function(val) {
       // console.log('val: ',val);
       this.refreshFlag = val <= 10 ? false : true;
+      // 到底部了
+      if(window.innerHeight + val >= document.body.scrollHeight - 1){
+        if (this.cdataList.length >= 40) return;
+        this.onLoadv();
+      }
     }
   },
   mounted() {
@@ -146,7 +155,7 @@ export default {
         width: ${titleitem.offsetWidth-8}px;`);
       })
     },
-    onLoad() {
+    onLoadv() {
       // 上拉加载
       setTimeout(() => {
         for (let i = 0; i < 10; i++) {
@@ -156,7 +165,6 @@ export default {
 
         if (this.cdataList.length >= 40) {
           this.finished = true; // 结束
-          this.$toast('没有更多数据了，休息一下吧');
         }
       }, 500);
     },

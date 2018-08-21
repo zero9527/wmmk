@@ -1,22 +1,22 @@
 <template>
   <div class="mainC">
     <headerT ref='headfn'></headerT>
-    <!-- 轮播图 -->
-    <van-swipe :autoplay="3000">
-      <van-swipe-item v-for="(item, index) in swipeList" :key="index">
-        <img :src="item.path" />
-      </van-swipe-item>
-    </van-swipe>
     <!-- 下拉刷新 -->
     <van-pull-refresh 
       v-model="isLoading" 
       @refresh="onRefresh"
       :disabled='refreshFlag'>
+      <!-- 轮播图 -->
+      <van-swipe :autoplay="3000">
+        <van-swipe-item v-for="(item, index) in swipeList" :key="index">
+          <img :src="item.path" />
+        </van-swipe-item>
+      </van-swipe>
       <!-- 列表 包含上拉加载 -->
       <van-list
       v-model="loading"
       :finished="finished"
-      @load="onLoadv">
+      :offset=10>
         <div class='item' v-for='(item, index) in dataList' 
         :key='index' @click='newsDetail(item.id)'>
           <p><img :src="item.img" alt=""></p>
@@ -100,13 +100,18 @@ export default {
     ];
     this.sint = setInterval(() => {
       // 解决任意向上滑动都会下拉刷新问题
-      this.scrollTop = window.scTop;
+      this.scrollTop = window.homeScTop;
     },1)
   },
   watch: {
     scrollTop: function(val) {
       // console.log('val: ',val);
       this.refreshFlag = val <= 10 ? false : true;
+      // 到底部了
+      if(window.innerHeight + val >= document.body.scrollHeight - 1){
+        if (this.dataList.length >= 40) return;
+        this.onLoadv();
+      }
     }
   },
   methods: {
@@ -117,7 +122,6 @@ export default {
           this.dataList.push(this.dataList[i]);
         }
         this.loading = false;
-
         if (this.dataList.length >= 40) {
           this.finished = true; // 结束
         }
@@ -134,6 +138,9 @@ export default {
     newsDetail(nid) {
       this.$router.push(`/newsDetail/${nid}`);
     }
+  },
+  deavticated() {
+    clearInterval(this.sint);
   },
   beforeDestroy() {
     clearInterval(this.sint);

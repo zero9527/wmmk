@@ -165,7 +165,7 @@ function numFomat(num, type, sep) {
     }
     return num
 }
-document.addEventListener('scroll', scrollFn, true);
+document.addEventListener('scroll', scrollFn);
 var scTop = 0;
 function scrollFn(e) {
     e = event || window.event;
@@ -212,9 +212,11 @@ function scrollFn(e) {
         if(location.hash.indexOf('xianp') > -1){
             window.xianpScTop = scTop;
 
-        }else if(location.hash.indexOf('circle') > -1){
+        }else if(location.hash.indexOf('circles') > -1){
             window.circleScTop = scTop;
 
+        }else if(location.hash.indexOf('home') > -1){
+            window.homeScTop = scTop;
         }
     } catch (err) {
         console.log('err: ', err);

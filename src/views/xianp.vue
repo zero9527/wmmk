@@ -20,17 +20,17 @@
         </div>
       </div>
     </div>
-    <!-- 轮播图 -->
-    <van-swipe :autoplay="3000">
-      <van-swipe-item v-for="(item, index) in swipeList" :key="index">
-        <img :src="item.path" />
-      </van-swipe-item>
-    </van-swipe>
     <!-- 下拉刷新 -->
     <van-pull-refresh
       v-model="isLoading"
       :disabled='refreshFlag'
       @refresh="onRefresh">
+      <!-- 轮播图 -->
+      <van-swipe :autoplay="3000">
+        <van-swipe-item v-for="(item, index) in swipeList" :key="index">
+          <img :src="item.path" />
+        </van-swipe-item>
+      </van-swipe>
       <!-- 横向辣榜 -->
       <p class='btitle'>
         <span><i></i>辣榜</span>
@@ -48,8 +48,7 @@
       <!-- 列表 包含上拉加载 -->
       <van-list
         v-model="loading"
-        :finished="finished"
-        @load="onLoad">
+        :finished="finished">
         <div class='itemx' v-for='(item, index) in xdataList' :key='index'>
           <p><img :src="item.img" alt=""></p>
           <div>
@@ -164,13 +163,18 @@ export default {
     this.bList = bList;
     this.sint = setInterval(() => {
       // 解决任意向上滑动都会下拉刷新问题
-      this.scrollTop = window.scTop;
+      this.scrollTop = window.xianpScTop;
     },1)
   },
   watch: {
     scrollTop: function(val) {
       // console.log('val: ',val);
       this.refreshFlag = val <= 10 ? false : true;
+      // 到底部了
+      if(window.innerHeight + val >= document.body.scrollHeight - 1){
+        if (this.xdataList.length >= 40) return;
+        this.onLoadv();
+      }
     }
   },
   mounted() {
@@ -204,7 +208,7 @@ export default {
       }
       return style;
     },
-    onLoad() {
+    onLoadv() {
       // 上拉加载
       setTimeout(() => {
         for (let i = 0; i < 10; i++) {
@@ -228,6 +232,9 @@ export default {
   activated() {
     // 恢复 header 的滚动位置
     document.querySelector('.title1').scrollLeft = this.$store.state.xianpHeader.scrollLeft;
+  },
+  deavticated() {
+    clearInterval(this.sint);
   },
   beforeDestroy() {
     clearInterval(this.sint);

@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <transition :name='transitionName' appear>
+    <!-- <transition :name='transitionName' appear> -->
       <keep-alive exclude="newsDetail">
         <router-view></router-view>
       </keep-alive>
-    </transition>
-    <load0 :loadshow='$store.state.loadShow'></load0>
+    <!-- </transition> -->
     <footerB ref='footer_ref'></footerB>
     <div class='gotop' @click='gotop'>
       <i class='iconfont icon-gotop'></i>
     </div>
+    <load0 :loadshow='$store.state.loadShow'></load0>
   </div>
 </template>
 
@@ -40,7 +40,7 @@ export default {
       let scint;
       let scTop = document.body.scrollTop || document.documentElement.scrollTop;
       // console.log('scTop: ',scTop);
-      scTop -= 40;
+      scTop -= 70;
       scint = setTimeout(() => {
           document.body.scrollTop
               ? (document.body.scrollTop = scTop)
@@ -69,13 +69,13 @@ export default {
       // console.log('this.$route: ',this.$route);
       // console.log('from: ',from);
       // 根据路由选择相应的高亮
-      if(this.$route.name == 'index'){
+      if(this.$route.name == 'home'){
         this.$refs.footer_ref.activeTab = this.$refs.footer_ref.tabList[0];
         
       }else if(this.$route.name == 'xianp'){
         this.$refs.footer_ref.activeTab = this.$refs.footer_ref.tabList[1];
 
-      }else if(this.$route.name == 'circle'){
+      }else if(this.$route.name == 'circles'){
         this.$refs.footer_ref.activeTab = this.$refs.footer_ref.tabList[2];
 
       }else if(this.$route.name == 'mine'){
@@ -106,7 +106,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  // margin-top: 60px;
+  overflow-x: hidden;
 }
 * {
   box-sizing: border-box;

@@ -23,7 +23,10 @@ const routes = [
   {
     path: '/home',
     name: 'home',
-    component: () => import('@/components/main-c')
+    component: () => import('@/components/main-c'),
+    meta: {
+      title: '水印之家'
+    },
   },
   {
     path: '/xianp',
@@ -57,38 +60,26 @@ const routes = [
     meta: {
       title: '新闻详情'
     }
-  },
-  {
-    path: '/main',
-    name: 'main',
-    component: () => import('@/components/main-c')
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
   }
 ]
 
 export default new Router({
   routes,
   scrollBehavior (to, from, savedPosition) {
+    // console.log('homeScTop: %s, xianpScTop: %s, circleScTop: %s',window.homeScTop, window.xianpScTop, window.circleScTop)
     if (savedPosition) {
       return savedPosition
     } else {
       // 滚动条按页面分别处理
       let top;
       if(location.hash.indexOf('xianp') > -1){
-        top = window.xianpScTop;
+        top = window.xianpScTop || 0;
 
-      }else if(location.hash.indexOf('circle') > -1){
-          top = window.circleScTop;
+      }else if(location.hash.indexOf('circles') > -1){
+          top = window.circleScTop || 0;
 
-      }else{
-          top = window.homeScTop;
+      }else if(location.hash.indexOf('home') > -1){
+          top = window.homeScTop || 0;
       }
       return { x: 0, y: top }
     }

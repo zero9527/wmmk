@@ -240,6 +240,7 @@ export default {
     border-bottom: 1px solid #f6f6f6;
     >li {
       font-size: .9rem;
+      position: relative;
       &:nth-of-type(1) {
         flex: 1 0 10%;
       }
@@ -307,6 +308,10 @@ export default {
 }
 .fred {
   color: red;
+}
+li {
+  margin: 0;
+  display: block;
 }
 </style>
 <style>

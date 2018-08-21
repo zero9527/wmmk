@@ -14,8 +14,8 @@
       </van-swipe>
       <!-- 列表 包含上拉加载 -->
       <van-list
-      v-model="loading"
-      :finished="finished"
+        v-model="loading"
+        :finished="finished">
         <div class='item' v-for='(item, index) in dataList' 
         :key='index' @click='newsDetail(item.id)'>
           <p><img :src="item.img" alt=""></p>

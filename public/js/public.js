@@ -165,7 +165,7 @@ function numFomat(num, type, sep) {
     }
     return num
 }
-document.addEventListener('scroll', scrollFn, false);
+document.addEventListener('scroll', scrollFn, true);
 var scTop = 0;
 function scrollFn(e) {
     e = event || window.event;

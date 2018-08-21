@@ -66,6 +66,7 @@
             </div>
           </div>
         </div>
+        <div v-if='finished' class='nomore'>没有更多数据了</div>
       </van-list>
     </van-pull-refresh>
   </div>
@@ -213,7 +214,6 @@ export default {
 
         if (this.xdataList.length >= 40) {
           this.finished = true; // 结束
-          this.$toast('没有更多数据了，休息一下吧');
         }
       }, 500);
     },

@@ -14,12 +14,11 @@
       :disabled='refreshFlag'>
       <!-- 列表 包含上拉加载 -->
       <van-list
-        v-model="loading"
-        :finished="finished"
-        @load="onLoadv">
+      v-model="loading"
+      :finished="finished"
+      @load="onLoadv">
         <div class='item' v-for='(item, index) in dataList' 
-        :key='index' :nid='item.id'
-         @click='newsDetail(item.id)'>
+        :key='index' @click='newsDetail(item.id)'>
           <p><img :src="item.img" alt=""></p>
           <div>
             <span>{{item.title}}</span>
@@ -28,7 +27,7 @@
             <p>{{item.num}}评</p>
           </div>
         </div>
-        <div v-if='finished'>没有更多数据了</div>
+        <div v-if='finished' class='nomore'>没有更多数据了</div>
       </van-list>
     </van-pull-refresh>
     <slot></slot>
@@ -38,9 +37,7 @@
 <script>
 import Vue from 'vue'
 import headerT from '@/components/header-t'
-import { List } from 'vant';
 
-Vue.use(List);
 export default {
   name: 'mainC',
   components: {
@@ -84,22 +81,23 @@ export default {
         }
       ],
       dataFirst: 1,
-      dataList: [
-        {id: '1',title: '《海岛大亨6》PC版跳票至2019年1月，主机版明夏发售',img:'images/l1.jpg',time: '22:54', num: '0',},
-        {id: '2',title: '酷派Mega 5A发布：配展讯处理器，印度独占',img:'images/l2.jpg',time: '22:24', num: '2'},
-        {id: '3',title: '国产红芯浏览器被指套壳谷歌Chrome，你怎么看？',img:'images/l3.jpg',time: '22:20', num: '10'},
-        {id: '4',title: 'WhatsApp创始人仍受雇于FaceBook：未放弃数亿美元股票',img:'images/l4.jpg',time: '21:54', num: '20'},
-        {id: '5',title: '华硕ROG Zephrus S电竞笔记本正式发布，外观刚劲霸气',img:'images/l5.jpg',time: '21:25', num: '450'},
-        {id: '6',title: '日本35岁男子要和初音结婚：已“同居”几月，将举办婚礼',img:'images/l6.jpg',time: '21:21', num: '123'},
-        {id: '7',title: '京东高管解读财报：京东与谷歌在很多方面存在互补',img:'images/l7.jpg',time: '21:14', num: '56'},
-        {id: '8',title: '台媒：今年只有OLED苹果iPhone可使用Apple Pencil',img:'images/l8.jpg',time: '20:01', num: '76'},
-        {id: '9',title: '医学泰斗被外卖员撞伤致死，饿了么致歉',img:'images/l9.jpg',time: '18:54', num: '189'},
-        {id: '10',title: '人脸识别机器人毁掉了我玩“找茬”最后的乐趣',img:'images/l10.jpg',time: '16:53', num: '156'},
-      ],
+      dataList: [],
       sint: ''
     }
   },
   created() {
+    this.dataList = [
+      {id: '1',title: '《海岛大亨6》PC版跳票至2019年1月，主机版明夏发售',img:'images/l1.jpg',time: '22:54', num: '0',},
+      {id: '2',title: '酷派Mega 5A发布：配展讯处理器，印度独占',img:'images/l2.jpg',time: '22:24', num: '2'},
+      {id: '3',title: '国产红芯浏览器被指套壳谷歌Chrome，你怎么看？',img:'images/l3.jpg',time: '22:20', num: '10'},
+      {id: '4',title: 'WhatsApp创始人仍受雇于FaceBook：未放弃数亿美元股票',img:'images/l4.jpg',time: '21:54', num: '20'},
+      {id: '5',title: '华硕ROG Zephrus S电竞笔记本正式发布，外观刚劲霸气',img:'images/l5.jpg',time: '21:25', num: '450'},
+      {id: '6',title: '日本35岁男子要和初音结婚：已“同居”几月，将举办婚礼',img:'images/l6.jpg',time: '21:21', num: '123'},
+      {id: '7',title: '京东高管解读财报：京东与谷歌在很多方面存在互补',img:'images/l7.jpg',time: '21:14', num: '56'},
+      {id: '8',title: '台媒：今年只有OLED苹果iPhone可使用Apple Pencil',img:'images/l8.jpg',time: '20:01', num: '76'},
+      {id: '9',title: '医学泰斗被外卖员撞伤致死，饿了么致歉',img:'images/l9.jpg',time: '18:54', num: '189'},
+      {id: '10',title: '人脸识别机器人毁掉了我玩“找茬”最后的乐趣',img:'images/l10.jpg',time: '16:53', num: '156'},
+    ];
     this.sint = setInterval(() => {
       // 解决任意向上滑动都会下拉刷新问题
       this.scrollTop = window.scTop;
@@ -131,15 +129,6 @@ export default {
         this.$toast('刷新成功');
         this.isLoading = false;
       }, 500);
-    },
-    mainCLK(e){
-      // console.log('e: ',e);
-      // console.log('headfn: ',this.$refs.headfn);
-      if(e.target.className.indexOf('arrow') == -1){
-        this.$refs.headfn.arrow = 'iconfont icon-down';
-        this.$refs.headfn.menuclass = 'hidemenu';
-        document.body.style.overflow = 'auto';
-      }
     },
     // 点击首页咨询项目
     newsDetail(nid) {
@@ -179,6 +168,7 @@ a {
 
 /* 列表 */
 .mainC{
+  width: 100%;
   /deep/ .item {
     min-height: 100px;
     display: flex;

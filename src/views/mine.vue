@@ -83,27 +83,43 @@
 </template>
 
 <script>
-
+import axios from "axios";
 export default {
-  name: 'mine',
+  name: "mine",
   components: {},
-  data () {
+  data() {
     return {
       user: {}
-    }
+    };
   },
-  created () {
+  created() {
     // console.log('$route: ',this.$route);
     this.user = {
-      name: '氪星超人',
-      level: '18',
-      prince: '1',
-      head: 'images/l1.jpg',
+      name: "氪星超人",
+      level: "18",
+      prince: "1",
+      head: "images/l1.jpg",
       gold: 2002,
       goldadd: 0
+    };
+    this.getList();
+  },
+  methods: {
+    getList() {
+      axios
+        .get("/api/getGallery")
+        .then(res => {
+          console.log("res: ", res);
+          if (res.code == 1) {
+            this.user.head = res.data[0].path;
+          }
+        })
+        .catch(err => {
+          console.error("err: ", err);
+        });
     }
   }
-}
+};
 </script>
 
 <style scoped lang='less'>
@@ -123,51 +139,51 @@ li {
   border-bottom: 8px solid #f6f6f6;
   text-align: left;
   &::after {
-    content: '';
+    content: "";
     width: 100%;
     height: 8px;
     position: absolute;
-    box-shadow: 0 1px 0px rgba(150,150,150,.2) inset;
+    box-shadow: 0 1px 0px rgba(150, 150, 150, 0.2) inset;
   }
-  >li {
+  > li {
     padding: 0 5%;
     &:active {
       background: #f6f6f6;
     }
-    >i {
+    > i {
       display: inline-block;
       padding: 10px 0;
       vertical-align: middle;
       margin-right: 5%;
     }
-    >span {
+    > span {
       width: 90%;
       display: inline-block;
       padding: 4vw 0;
       vertical-align: middle;
       border-bottom: 1px solid #f6f6f6;
     }
-    >.right {
+    > .right {
       position: absolute;
       right: 5%;
       color: orange;
-      >i {
+      > i {
         vertical-align: middle;
       }
-      >span {
+      > span {
         vertical-align: middle;
       }
     }
   }
 }
 .head {
-  >li {
+  > li {
     position: relative;
     padding: 0 5%;
     &:active {
       background: transparent;
     }
-    >span {
+    > span {
       width: auto;
       border: none;
       padding: 2px 6px;
@@ -175,18 +191,18 @@ li {
       line-height: normal;
       border-radius: 20px;
       background: #eceff1;
-      font-size: .8rem;
-      >i {
+      font-size: 0.8rem;
+      > i {
         vertical-align: middle;
-        font-size: .6rem;
+        font-size: 0.6rem;
       }
-      >span {
+      > span {
         vertical-align: middle;
       }
     }
     &:nth-of-type(1) {
       padding-left: 30%;
-      >div {
+      > div {
         position: absolute;
         top: 50%;
         right: 0;
@@ -194,24 +210,24 @@ li {
         padding-right: 16px;
         border-radius: 30px 0 0 30px;
         background: #f6f6f6;
-        font-size: .8rem;
+        font-size: 0.8rem;
         text-align: center;
         transform: translateY(-50%);
-        >p {
+        > p {
           margin: 0;
           margin-top: 2px;
           color: orange;
-          >i {
+          > i {
             vertical-align: middle;
           }
-          >span {
+          > span {
             vertical-align: middle;
           }
         }
-        >i {
+        > i {
           position: absolute;
           right: 2px;
-          font-size: .7rem;
+          font-size: 0.7rem;
           top: 50%;
           transform: translateY(-50%);
         }
@@ -222,16 +238,16 @@ li {
       justify-content: space-between;
       padding: 14vw 8% 0;
       text-align: center;
-      >div {
+      > div {
         &:active {
           color: red;
         }
-        >p {
+        > p {
           margin-top: 4px;
         }
       }
     }
-    >img {
+    > img {
       width: 20vw;
       height: 20vw;
       position: absolute;

@@ -1,5 +1,5 @@
 <template>
-  <div class="headerT">
+  <div class="headerT content-center">
     <div class='hTop' :class='uphide'>
       <div calss='div8'>
         <i class='iconfont icon-drinks logo'></i>
@@ -188,6 +188,7 @@ export default {
   width: 100%;
   position: fixed;
   top: 0;
+  font-size: 14px;
   background: #fff;
   box-shadow: 0 1px 10px rgba(0,0,0,.1);
   transition: transform .3s ease;
@@ -197,8 +198,8 @@ export default {
     justify-content: space-between;
   }
   &>div {
-    min-height: 10vmin;
-    padding: 2vmin;
+    min-height: 40px;
+    padding: 10px;
   }
   .logo {
     margin: 0 4px;
@@ -216,7 +217,7 @@ export default {
   }
   .titlepar {
     width: 94%;
-    height: 10vmin;
+    height: 40px;
     // min-height: 6vh;
     position: relative;
     padding-top: 0;
@@ -234,9 +235,9 @@ export default {
       z-index: -1;
     }
     .title {
-      height: 10vmin;
+      height: 40px;
       width: 100vw;
-      line-height: 10vmin;
+      line-height: 40px;
       position: relative;
       overflow-y: hidden;
       overflow-x: scroll;
@@ -262,11 +263,11 @@ export default {
   }
   .arrow {
     width: 10vw;
-     height: 10vmin;
-    line-height: 10vmin;
+    height: 40px;
+    line-height: 40px;
     position: absolute;
     right: 0;
-    top: 10vmin;
+    top: 40px;
     text-align: center;
     background: linear-gradient(to right, rgba(256,256,256,.9) 30%, #fff 50%);
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="footerB footer_B">
+  <div class="footerB footer_B content-center">
     <ul class='_tab'>
       <li v-for='tab in tabList' 
       :key='tab.id'
@@ -84,15 +84,16 @@ export default {
 <style lang='less'>
 .footerB {
   width: 100%;
-  height: 14vmin;
   display: flex;
   position: fixed;
   align-items: center;
   bottom: 0;
-  box-shadow: 0 -2px 10px rgba(0,0,0,.1);
-  z-index: 100;
+  padding: 4px 0;
+  font-size: 14px;
   background: #fbf9fe;
   transition: transform .3s ease;
+  box-shadow: 0 -2px 10px rgba(0,0,0,.1);
+  z-index: 100;
 
   ._tab {
     width: 100%;

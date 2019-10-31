@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="content-center">
     <!-- <transition :name='transitionName' appear>
     </transition> -->
     <keep-alive exclude="newsDetail">
@@ -100,8 +100,15 @@ export default {
 body {
   margin: 0;
 }
+.content-center {
+  width: 100%;
+  max-width: 450px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
 #app {
-  min-width: 100vw;
+  width: 100%;
   min-height: 100vh;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -165,7 +172,7 @@ body {
     background: rgba(70, 70, 70, .8);
   }
   >i {
-    font-size: 6vw !important;
+    font-size: 16px !important;
   }
 }
 .showGotop {

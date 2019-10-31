@@ -174,9 +174,9 @@ a {
 }
 
 /* 列表 */
-.mainC{
+.mainC {
   width: 100%;
-  padding-top: 22vmin;
+  padding-top: 90px;
   padding-bottom: 6vh;
   /deep/ .item {
     min-height: 100px;
@@ -226,6 +226,7 @@ a {
   }
 }
 .van-swipe {
+  height: 200px;
   cursor: pointer;
   &-item {
     color: #fff;

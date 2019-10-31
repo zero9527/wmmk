@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <transition :name='transitionName' appear>
-      <keep-alive exclude="newsDetail">
-        <router-view></router-view>
-      </keep-alive>
-    </transition>
+    <!-- <transition :name='transitionName' appear>
+    </transition> -->
+    <keep-alive exclude="newsDetail">
+      <router-view></router-view>
+    </keep-alive>
     <footerB ref='footer_ref'></footerB>
     <div class='gotop' @click='gotop'>
       <i class='iconfont icon-gotop'></i>

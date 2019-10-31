@@ -2,6 +2,7 @@ module.exports = {
   publicPath: './',
   outputDir: 'docs',
   assetsDir: './',
+  productionSourceMap: false,
   devServer: {
     proxy: {  // 配置跨域代理
       '/api': {
